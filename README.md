@@ -1,9 +1,9 @@
-# InterfaceCC
+# viralCC
 The shell script helps you find known variant missense residues (P/LP and B/LB) that occur at protein-protein interfaces for use as *in silico* controls. It currently accepts search output data from ClinVar as inputs and returns JSON information filtered out from PIONEER.
 
 ## Subscripts
 
-All subscripts can be accessed independently and used from the command line as seperate utilities:
+All subscripts can be accessed independently and used from the command line as separate utilities:
 
 ```bash
 python {script}.py <arg1> <arg2> ...
