@@ -1,5 +1,7 @@
-# InterfaceCC
+# Variant Interface Control Creator
 The shell script helps you find known variant missense residues (P/LP and B/LB) that occur at protein-protein interfaces for use as *in silico* controls. It currently accepts search output data from ClinVar as inputs and returns JSON information filtered out from PIONEER.
+
+![vicc workflow diagram](vicc.png)
 
 ## Subscripts
 
@@ -42,6 +44,8 @@ The script accepts the following command-line options:
 
 - `-h, --help`: Displays a help message detailing how to use the script and what each option does.
 
+- `-s, --stringent`: If flag is set to true, the pipeline will return a final JSON contaning only those proteins that have both P/LP AND B/LB variants that occur at interfaces.
+
 #### Examples
 
 To run the script with specific benign and pathogenic variant tables and an output folder named `analysis_output`:
@@ -66,11 +70,11 @@ All output files will be saved in the specified `output_folder`.
 
 ## Workflow Steps
 
-1. `1_subset.py`: This script is used to subset a TSV file by the values in its second column, which is assumed to be a gene name. The output is a directory of TSV files, each corresponding to a gene name. 
-2. `2_common.py`: This script is used to remove files from two folders that don't have a shared basename. Shared basenames tell us that genes in question have both benign and pathogenic variants.
-3. `3_rois.py`: The residues of interest script is used to extract numbers from protein change codes in TSV files. The output is a JSON file containing a dictionary of lists, where each key is the basename of a TSV file and each value is a missense residue position. We'll search against these numbers to see if they appear in an interface.
-4. `4_search.py`: Find residues in the interface of a protein-protein interaction that are also missense variants in a gene. The output is a JSON file containing a dictionary of dictionaries, where each key is a gene name and each value is a dictionary of dictionaries, where each key is a partner gene name and each value is a list of common residues.
-5. `5_shared.py`: Finds the shared keys between two JSON files and write them to a new JSON file. For control purposes, it tells you which proteins have both P/LP & B/LP variant residues in their interfaces, and which proteins those interfaces are with.       
+1. `subset.py`: This script is used to subset a TSV file by the values in its second column, which is assumed to be a gene name. The output is a directory of TSV files, each corresponding to a gene name. 
+2. `common.py`: (Optional) This script is used to remove files from two folders that don't have a shared basename. Shared basenames tell us that genes in question have both benign and pathogenic variants.
+3. `rois.py`: The residues of interest script is used to extract numbers from protein change codes in TSV files. The output is a JSON file containing a dictionary of lists, where each key is the basename of a TSV file and each value is a missense residue position. We'll search against these numbers to see if they appear in an interface.
+4. `search.py`: Find residues in the interface of a protein-protein interaction that are also missense variants in a gene. The output is a JSON file containing a dictionary of dictionaries, where each key is a gene name and each value is a dictionary of dictionaries, where each key is a partner gene name and each value is a list of common residues.
+5. `shared.py`: (Optional) Finds the shared keys between two JSON files and write them to a new JSON file. For control purposes, it tells you which proteins have both P/LP & B/LP variant residues in their interfaces, and which proteins those interfaces are with.       
 
 ## TODO
 - Implement more detailed error reporting and logging.
