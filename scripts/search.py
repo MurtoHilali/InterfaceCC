@@ -4,6 +4,7 @@ import time
 from unipressed import IdMappingClient
 import argparse
 import re
+
 ####################################################################################################
 ## This script is used to find residues in the interface of a protein-protein interaction that    ##
 ## are also missense variants in a gene. The input is a TSV file containing protein-protein       ##

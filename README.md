@@ -1,7 +1,7 @@
-# Variant Interface Control Creator
+# Variant Interface Control Identifier
 The shell script helps you find known variant missense residues (P/LP and B/LB) that occur at protein-protein interfaces for use as *in silico* controls. It currently accepts search output data from ClinVar as inputs and returns JSON information filtered out from PIONEER.
 
-![vicc workflow diagram](vicc.png)
+![vici workflow diagram](vici.png)
 
 ## Subscripts
 
@@ -20,7 +20,7 @@ python {script}.py <arg1> <arg2> ...
 To execute the script, open your terminal and navigate to the folder containing the script. Then run:
 
 ```bash
-./run.sh \
+./vici.sh \
 -B [path/to/benign/variant/table] \
 -P [path/to/pathogenic/variant/table] \
 -O [output_folder_name]
@@ -29,7 +29,7 @@ To execute the script, open your terminal and navigate to the folder containing 
 For example, if you have benign variant data in a file named `benign_data.tsv`, pathogenic variant data in `pathogenic_data.tsv`, and you want to output to a folder named `results`, run:
 
 ```bash
-./run.sh -B benign_data.tsv -P pathogenic_data.tsv -O results
+./vici.sh -B benign_data.tsv -P pathogenic_data.tsv -O results
 ```
 
 ### Command-line Options
@@ -51,13 +51,13 @@ The script accepts the following command-line options:
 To run the script with specific benign and pathogenic variant tables and an output folder named `analysis_output`:
 
 ```bash
-./run.sh -B benign_variants.tsv -P pathogenic_variants.tsv -O analysis_output
+./vici.sh -B benign_variants.tsv -P pathogenic_variants.tsv -O analysis_output
 ```
 
 To display the help menu:
 
 ```bash
-./run.sh -h
+./vici.sh -h
 ```
 
 ## Output
