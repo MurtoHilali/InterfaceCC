@@ -1,4 +1,4 @@
-# Variant Interface Control Identifier
+# variCC
 The shell script helps you find known variant missense residues (P/LP and B/LB) that occur at protein-protein interfaces for use as *in silico* controls. It currently accepts search output data from ClinVar as inputs and returns JSON information filtered out from PIONEER.
 
 ![vici workflow diagram](vici.png)
