@@ -33,20 +33,27 @@ def process_tsv_files(directory, output_json):
                 # Skip header
                 next(reader)
                 
-                # List to hold numbers from column 3
+                # Lists to hold values from column 3
                 numbers_list = []
-                
+                protein_change_list = []
+
                 # Read rows and collect numbers
                 for row in reader:
-                    protein_change = row[2]
-                    number = extract_number_from_protein_change(protein_change)
-                    
-                    if number is not None:
-                        numbers_list.append(number)
+                    protein_changes = row[2].split(', ')
+                    for change in protein_changes:
+                        protein_change_list.append(change)
+                        number = extract_number_from_protein_change(change)
+                        if number is not None:
+                            numbers_list.append(number)
+                        
                 
                 # Add to the output dictionary
                 basename = os.path.splitext(filename)[0]
-                output_dict[basename] = numbers_list
+                numbers_list = sorted(list(set(numbers_list)))
+                output_dict[basename] = {
+                    'protein_change': protein_change_list, 
+                    'positions': numbers_list
+                }
     
     # Output the dictionary as a JSON file
     with open(output_json, 'w') as json_file:
